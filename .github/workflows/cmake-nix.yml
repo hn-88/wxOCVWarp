@@ -22,6 +22,19 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Install OpenCV
+      # We're using the distro's default opencv build, since that should be sufficient.
+      run: |
+        sudo apt update
+        # sudo apt install libopencv-dev python3-opencv
+
+    - name: Install wxWidgets
+      # We're using the distro's default build, since that should be sufficient.
+      run: |
+        sudo apt install libwxgtk3.0-gtk3-dev
+        # from https://packages.ubuntu.com/search?suite=jammy&keywords=wxgtk
+        # we would need to change version when upgrading ubuntu.
+        
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
@@ -38,31 +51,29 @@ jobs:
       # trying with go-appimage
       run: |
         echo "create appimage"
-        mkdir -p appdir/usr/bin ; cp $HOME/source/OpenSpace/bin/OpenSpace_Helper $HOME/source/OpenSpace/bin/OpenSpace ./appdir/usr/bin ; strip ./appdir/usr/bin/*
-        mkdir -p appdir/usr/share/applications ; cp ./appdir/OpenSpace.desktop ./appdir/usr/share/applications/
-        mkdir -p appdir/usr/share/icons/hicolor/256x256/apps ; cp ./appdir/OpenSpace.png ./appdir/usr/share/icons/hicolor/256x256/apps/
+       
 
         # https://github.com/probonopd/go-appimage/blob/master/src/appimagetool/README.md
-        wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases/expanded_assets/continuous -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
-        chmod +x appimagetool-*.AppImage
+        #wget -c https://github.com/$(wget -q https://github.com/probonopd/go-appimage/releases/expanded_assets/continuous -O - | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d '"' -f 2)
+        #chmod +x appimagetool-*.AppImage
 
         # If you ever get an issue with appimage bundling the wrong Qt version,
         # try setting the  QTDIR env var (cf. https://github.com/probonopd/go-appimage/issues/268)
         # ./appimagetool-*.AppImage -s deploy appdir/usr/share/applications/*.desktop # Bundle EVERYTHING
         # or 
-        ./appimagetool-*.AppImage deploy appdir/usr/share/applications/*.desktop # Bundle everything except what comes with the base system
+        #./appimagetool-*.AppImage deploy appdir/usr/share/applications/*.desktop # Bundle everything except what comes with the base system
 
         # turn AppDir into AppImage
-        VERSION=0.10 ./appimagetool-*.AppImage ./appdir
+        #VERSION=0.10 ./appimagetool-*.AppImage ./appdir
 
-    - name: Upload AppImage Artifact
-      uses: actions/upload-artifact@v4
-      with:
+   # - name: Upload AppImage Artifact
+   #   uses: actions/upload-artifact@v4
+   #   with:
         # Artifact name
-        name: wxOCVWarp-AppImage
+        #name: wxOCVWarp-AppImage
         # optional, default is artifact
         # A file, directory or wildcard pattern that describes what to upload
-        path: /home/runner/work/OpenSpace-AppImage/OpenSpace-AppImage/OpenSpace-*-x86_64.AppImage
+        #path: /home/runner/work/OpenSpace-AppImage/OpenSpace-AppImage/OpenSpace-*-x86_64.AppImage
       
     
 
