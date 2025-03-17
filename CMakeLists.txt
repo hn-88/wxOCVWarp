@@ -19,4 +19,4 @@ if(wxWidgets_USE_FILE) # not defined in CONFIG mode
     include(${wxWidgets_USE_FILE})
 endif()
 add_executable(OCVWarp.bin hello.cpp)
-target_link_libraries(hello ${wxWidgets_LIBRARIES})
+target_link_libraries(OCVWarp.bin ${wxWidgets_LIBRARIES})
