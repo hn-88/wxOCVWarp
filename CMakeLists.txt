@@ -18,5 +18,5 @@ find_package(wxWidgets REQUIRED COMPONENTS net core base)
 if(wxWidgets_USE_FILE) # not defined in CONFIG mode
     include(${wxWidgets_USE_FILE})
 endif()
-add_executable(hello hello.cpp)
+add_executable(OCVWarp.bin hello.cpp)
 target_link_libraries(hello ${wxWidgets_LIBRARIES})
