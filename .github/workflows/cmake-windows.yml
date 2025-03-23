@@ -31,14 +31,18 @@ jobs:
       # Choco default did not work. 
       run: |
         # https://docs.wxwidgets.org/3.2.1/plat_msw_binaries.html
-        
+        mkdir C:\wx
+        cd C:\wx
         wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxWidgets-3.2.7-headers.7z
         wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxMSW-3.2.7_vc14x_x64_Dev.7z
         wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxMSW-3.2.7_vc14x_x64_ReleaseDLL.7z
         wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxMSW-3.2.7_vc14x_x64_ReleasePDB.7z
         echo "Download complete. Extracting ... "
-        7z x 
-        
+        7z x wxWidgets-3.2.7-headers.7z
+        7z x wxMSW-3.2.7_vc14x_x64_Dev.7z
+        7z x wxMSW-3.2.7_vc14x_x64_ReleaseDLL.7z
+        7z x wxMSW-3.2.7_vc14x_x64_ReleasePDB.7z
+        setx wxwin "C:\wx"
         # choco install wxwidgets -y - doesn't work - cmake error could not find wxwidgets (missing: wxwidgets_libraries etc 
         
                 
