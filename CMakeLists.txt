@@ -14,6 +14,14 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules/")
 # target_link_libraries(OCVWarp.bin ${OpenCV_LIBS})
 
 # https://docs.wxwidgets.org/3.2.6/overview_cmake.html#cmake_apps
+
+# from https://github.com/OpenSpace/OpenSpace/blob/feature/applesilicon/CMakeLists.txt
+# for issue #1
+if (MSVC)
+  set(wxWidgets_ROOT_DIR $ENV{WXWIN})
+  set(wxWidgets_LIBRARIES $ENV{WXWIN}/include) 
+endif ()
+
 find_package(wxWidgets REQUIRED)
 if(wxWidgets_USE_FILE) # not defined in CONFIG mode
     include(${wxWidgets_USE_FILE})
