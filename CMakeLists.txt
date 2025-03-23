@@ -14,7 +14,7 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules/")
 # target_link_libraries(OCVWarp.bin ${OpenCV_LIBS})
 
 # https://docs.wxwidgets.org/3.2.6/overview_cmake.html#cmake_apps
-find_package(wxWidgets REQUIRED COMPONENTS net core base)
+find_package(wxWidgets 3.1 REQUIRED)
 if(wxWidgets_USE_FILE) # not defined in CONFIG mode
     include(${wxWidgets_USE_FILE})
 endif()
