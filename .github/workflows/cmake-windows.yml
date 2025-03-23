@@ -28,10 +28,19 @@ jobs:
         Choco install OpenCV -y
 
     - name: Install wxWidgets
-      # We're using the distro's default build, since that should be sufficient.
+      # Choco default did not work. 
       run: |
-        choco install wxwidgets -y
-        # from https://community.chocolatey.org/packages/wxwidgets
+        # https://docs.wxwidgets.org/3.2.1/plat_msw_binaries.html
+        
+        wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxWidgets-3.2.7-headers.7z
+        wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxMSW-3.2.7_vc14x_x64_Dev.7z
+        wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxMSW-3.2.7_vc14x_x64_ReleaseDLL.7z
+        wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxMSW-3.2.7_vc14x_x64_ReleasePDB.7z
+        echo "Download complete. Extracting ... "
+        7z x 
+        
+        # choco install wxwidgets -y - doesn't work - cmake error could not find wxwidgets (missing: wxwidgets_libraries etc 
+        
                 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
