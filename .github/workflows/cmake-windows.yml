@@ -25,25 +25,21 @@ jobs:
     - name: Install OpenCV
       # We're using chocolatey's default opencv build, since that should be sufficient.
       run: |
-        Choco install OpenCV -y
+        # Choco install OpenCV -y
 
     - name: Install wxWidgets
       # Choco default did not work. 
       run: |
-        # https://docs.wxwidgets.org/3.2.1/plat_msw_binaries.html
-        mkdir C:\wx
-        cd C:\wx
-        powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxWidgets-3.2.7-headers.7z' -OutFile 'wxWidgets-3.2.7-headers.7z'"
-        powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxMSW-3.2.7_vc14x_x64_Dev.7z -OutFile 'wxMSW-3.2.7_vc14x_x64_Dev.7z'"
-        powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxMSW-3.2.7_vc14x_x64_ReleaseDLL.7z -OutFile 'wxMSW-3.2.7_vc14x_x64_ReleaseDLL.7z'"
-        powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.7/wxMSW-3.2.7_vc14x_x64_ReleasePDB.7z -OutFile 'wxMSW-3.2.7_vc14x_x64_ReleasePDB.7z'"
-        echo "Download complete. Extracting ... "
-        7z x wxWidgets-3.2.7-headers.7z
-        7z x wxMSW-3.2.7_vc14x_x64_Dev.7z
-        7z x wxMSW-3.2.7_vc14x_x64_ReleaseDLL.7z
-        7z x wxMSW-3.2.7_vc14x_x64_ReleasePDB.7z
-        setx wxwin "C:\wx"
+        # https://docs.wxwidgets.org/3.2.1/plat_msw_binaries.html - did not work
         # choco install wxwidgets -y - doesn't work - cmake error could not find wxwidgets (missing: wxwidgets_libraries etc 
+        # https://lebao3105.github.io/content/tutorials/wxWidgets_WindowsCmake.html
+        git clone https://github.com/wxWidgets/wxWidgets.git --recursive 
+        cd wxWidgets
+        md build
+        cd build
+        setx WXWIN C:\wx
+        cmake -B .. -DCMAKE_INSTALL_PREFIX=%WXWIN% -DCMAKE_GENERATOR_PLATFORM=%ARCH%
+        cmake --build . --target install
         
                 
     - name: Configure CMake
