@@ -35,9 +35,10 @@ jobs:
         # https://lebao3105.github.io/content/tutorials/wxWidgets_WindowsCmake.html
         git clone https://github.com/wxWidgets/wxWidgets.git --recursive 
         cd wxWidgets
-        md build
+        # md build - this already exists
         cd build
         setx WXWIN C:\wx
+        setx ARCH x64
         cmake -B .. -DCMAKE_INSTALL_PREFIX=%WXWIN% -DCMAKE_GENERATOR_PLATFORM=%ARCH%
         cmake --build . --target install
         
