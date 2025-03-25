@@ -39,7 +39,8 @@ jobs:
         cd build
         setx WXWIN C:\wx
         setx ARCH x64
-        cmake -B .. -DCMAKE_INSTALL_PREFIX=%WXWIN% -DCMAKE_GENERATOR_PLATFORM=%ARCH%
+        # specify source and build dirs with -S and -B
+        cmake -S .. -DCMAKE_INSTALL_PREFIX=%WXWIN% -DCMAKE_GENERATOR_PLATFORM=%ARCH%
         cmake --build . --target install
         
                 
