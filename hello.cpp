@@ -74,3 +74,5 @@ void MyFrame::OnHello(wxCommandEvent& event)
 {
     wxLogMessage("Hello world from wxWidgets!");
 }
+
+int WinMain() { return 0;}
