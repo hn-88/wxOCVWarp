@@ -46,13 +46,16 @@ jobs:
         md C:/wxWidgets-3.2.6
         cd C:/wxWidgets-3.2.6
 
+        powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxWidgets-3.2.6-headers.7z' -OutFile 'wxWidgets-3.2.6-headers.7z'"
         powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_Dev.7z' -OutFile 'wxMSW-3.2.6_vc14x_x64_Dev.7z'"
         powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_ReleaseDLL.7z' -OutFile 'wxMSW-3.2.6_vc14x_x64_ReleaseDLL.7z'"
         powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_ReleasePDB.7z' -OutFile 'wxMSW-3.2.6_vc14x_x64_ReleasePDB.7z'"
+        7z x wxWidgets-3.2.6-headers.7z
         7z x wxMSW-3.2.6_vc14x_x64_Dev.7z
         7z x wxMSW-3.2.6_vc14x_x64_ReleaseDLL.7z
         7z x wxMSW-3.2.6_vc14x_x64_ReleasePDB.7z
         echo "checking install dirs"
+        dir C:/wxWidgets-3.2.6/include
         dir C:/wxWidgets-3.2.6/lib
         dir C:/wxWidgets-3.2.6/lib/vc14x_x64_dll
         # $Env:wxWidgets_ROOT_DIR = ${{env.WXWIN}}
