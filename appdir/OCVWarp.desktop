@@ -4,7 +4,7 @@
 Version=1.0
 Name=OCVWarp
 Comment=OCVWarp tool
-Exec=OCVWarp.bin
+Exec=OCVWarp
 Icon=OCVWarp
 Terminal=true
 Type=Application
