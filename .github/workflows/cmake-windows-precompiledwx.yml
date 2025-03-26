@@ -13,8 +13,9 @@ env:
   BUILD_TYPE: Release
   WXWIN: C:/wxWidgets-3.1.2
   # assuming the setup.exe installs to this directory as per logs "deployed to"
-  WXLIB: C:/wxWidgets-3.1.2/include
-  WXINCLUDEDIR: C:/wxWidgets-3.1.2/lib/vc14x_x64_dll
+  wxWidgets_ROOT_DIR: C:/wxWidgets-3.1.2
+  wxWidgets_LIBRARIES: C:/wxWidgets-3.1.2/include
+  wxWidgets_INCLUDE_DIRS: C:/wxWidgets-3.1.2/lib/vc14x_x64_dll
   ARCH: x64
 
 jobs:
@@ -40,7 +41,13 @@ jobs:
         # https://lebao3105.github.io/content/tutorials/wxWidgets_WindowsCmake.html
         # https://stackoverflow.com/questions/61858388/how-do-i-set-an-enviroment-variable-in-github-action-on-a-windows-server
         # https://stackoverflow.com/questions/66733076/github-actions-set-environment-variable-for-windows-build-with-powershell
-        # https://stackoverflow.com/questions/45226775/cmake-how-to-specify-target-platform       
+        # https://stackoverflow.com/questions/45226775/cmake-how-to-specify-target-platform
+        echo "checking install dirs"
+        dir C:/wxWidgets-3.1.2/lib
+        dir C:/wxWidgets-3.1.2/lib/vc14x_x64_dll
+        # $Env:wxWidgets_ROOT_DIR = ${{env.WXWIN}}
+        # setx wxWidgets_LIBRARIES ${{env.WXLIB}} 
+        # setx wxWidgets_INCLUDE_DIRS ${{env.WXINCLUDEDIR}}
         
                 
     - name: Configure CMake
