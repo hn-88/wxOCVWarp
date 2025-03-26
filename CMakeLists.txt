@@ -19,12 +19,14 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules/")
 # for issue #1
 if (MSVC)
   set(wxWidgets_ROOT_DIR $ENV{WXWIN})
-  set(wxWidgets_LIBRARIES $ENV{WXWIN}/include) 
+  set(wxWidgets_LIBRARIES $ENV{WXWIN}/include)
+  set(wxWidgets_INCLUDE_DIR $ENV{WXWIN}/lib/vc_x64_dll)
 endif ()
 
 find_package(wxWidgets REQUIRED)
 if(wxWidgets_USE_FILE) # not defined in CONFIG mode
     include(${wxWidgets_USE_FILE})
 endif()
-add_executable(OCVWarp.bin hello.cpp)
-target_link_libraries(OCVWarp.bin ${wxWidgets_LIBRARIES})
+
+add_executable(OCVWarp hello.cpp)
+target_link_libraries(OCVWarp ${wxWidgets_LIBRARIES})
