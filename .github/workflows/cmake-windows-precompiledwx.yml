@@ -11,11 +11,10 @@ on: workflow_dispatch
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  WXWIN: C:/wxWidgets-3.1.2
-  # assuming the setup.exe installs to this directory as per logs "deployed to"
-  wxWidgets_ROOT_DIR: C:/wxWidgets-3.1.2
-  wxWidgets_LIBRARIES: C:/wxWidgets-3.1.2/include
-  wxWidgets_INCLUDE_DIRS: C:/wxWidgets-3.1.2/lib/vc14x_x64_dll
+  WXWIN: C:/wxWidgets-3.2.6
+  wxWidgets_ROOT_DIR: C:/wxWidgets-3.2.6
+  wxWidgets_LIBRARIES: C:/wxWidgets-3.2.6/include
+  wxWidgets_INCLUDE_DIRS: C:/wxWidgets-3.2.6/lib/vc14x_x64_dll
   ARCH: x64
 
 jobs:
@@ -43,12 +42,19 @@ jobs:
         # https://stackoverflow.com/questions/66733076/github-actions-set-environment-variable-for-windows-build-with-powershell
         # https://stackoverflow.com/questions/45226775/cmake-how-to-specify-target-platform
 
-        https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_Dev.7z
-        https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_ReleaseDLL.7z
-        https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_ReleasePDB.7z
+        echo "Downloading wxMSW release..."
+        md C:/wxWidgets-3.2.6
+        cd C:/wxWidgets-3.2.6
+
+        powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_Dev.7z' -OutFile 'wxMSW-3.2.6_vc14x_x64_Dev.7z'"
+        powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_ReleaseDLL.7z' -OutFile 'wxMSW-3.2.6_vc14x_x64_ReleaseDLL.7z'"
+        powershell -c "Invoke-WebRequest -Uri 'https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_ReleasePDB.7z' -OutFile 'wxMSW-3.2.6_vc14x_x64_ReleasePDB.7z'"
+        7z x wxMSW-3.2.6_vc14x_x64_Dev.7z
+        7z x wxMSW-3.2.6_vc14x_x64_ReleaseDLL.7z
+        7z x wxMSW-3.2.6_vc14x_x64_ReleasePDB.7z
         echo "checking install dirs"
-        dir C:/wxWidgets-3.1.2/lib
-        dir C:/wxWidgets-3.1.2/lib/vc14x_x64_dll
+        dir C:/wxWidgets-3.2.6/lib
+        dir C:/wxWidgets-3.2.6/lib/vc14x_x64_dll
         # $Env:wxWidgets_ROOT_DIR = ${{env.WXWIN}}
         # setx wxWidgets_LIBRARIES ${{env.WXLIB}} 
         # setx wxWidgets_INCLUDE_DIRS ${{env.WXINCLUDEDIR}}
