@@ -11,6 +11,8 @@ on: workflow_dispatch
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
+  WXWIN: C:/wx
+  ARCH: x64
 
 jobs:
   build:
@@ -33,14 +35,17 @@ jobs:
         # https://docs.wxwidgets.org/3.2.1/plat_msw_binaries.html - did not work
         # choco install wxwidgets -y - doesn't work - cmake error could not find wxwidgets (missing: wxwidgets_libraries etc 
         # https://lebao3105.github.io/content/tutorials/wxWidgets_WindowsCmake.html
+        # https://stackoverflow.com/questions/61858388/how-do-i-set-an-enviroment-variable-in-github-action-on-a-windows-server
+        # https://stackoverflow.com/questions/66733076/github-actions-set-environment-variable-for-windows-build-with-powershell
+        # https://stackoverflow.com/questions/45226775/cmake-how-to-specify-target-platform
         git clone https://github.com/wxWidgets/wxWidgets.git --recursive 
         cd wxWidgets
         # md build - this already exists
         cd build
-        setx WXWIN C:\wx
-        setx ARCH x64
+        # setx WXWIN C:\wx
+        # setx ARCH x64
         # specify source and build dirs with -S and -B
-        cmake -S .. -DCMAKE_INSTALL_PREFIX=%WXWIN% -DCMAKE_GENERATOR_PLATFORM=%ARCH% -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        cmake -G"Visual Studio 17 2022 Win64" -S .. -DCMAKE_INSTALL_PREFIX=${{env.WXWIN}} -DCMAKE_GENERATOR_PLATFORM=${{env.ARCH}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         cmake --build . --config ${{env.BUILD_TYPE}} --target install
         
                 
