@@ -11,7 +11,7 @@ on: workflow_dispatch
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  WXWIN: C:/wxwidgets/3.4.5
+  WXWIN: C:/wxwidgets/3.1.2
   # assuming the setup.exe installs to this directory as per https://docs.wxwidgets.org/latest/plat_msw_install.html#msw_build_apps
   ARCH: x64
 
@@ -34,7 +34,7 @@ jobs:
       # Choco default installs https://github.com/wxWidgets/wxWidgets/releases/download/v3.1.2/wxMSW-3.1.2-Setup.exe
       run: |
         # https://docs.wxwidgets.org/3.2.1/plat_msw_binaries.html 
-        choco install wxwidgets@3.1.2 -y  
+        choco install wxwidgets -y  
         # https://lebao3105.github.io/content/tutorials/wxWidgets_WindowsCmake.html
         # https://stackoverflow.com/questions/61858388/how-do-i-set-an-enviroment-variable-in-github-action-on-a-windows-server
         # https://stackoverflow.com/questions/66733076/github-actions-set-environment-variable-for-windows-build-with-powershell
