@@ -11,8 +11,8 @@ on: workflow_dispatch
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  WXWIN: C:/wxwidgets/3.1.2
-  # assuming the setup.exe installs to this directory as per https://docs.wxwidgets.org/latest/plat_msw_install.html#msw_build_apps
+  WXWIN: C:/wxWidgets-3.1.2
+  # assuming the setup.exe installs to this directory as per logs "deployed to"
   ARCH: x64
 
 jobs:
