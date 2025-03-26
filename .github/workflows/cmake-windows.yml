@@ -67,6 +67,6 @@ jobs:
         name: wxOCVWarp-executable
         # optional, default is artifact
         # A file, directory or wildcard pattern that describes what to upload
-        path: build/OCVWarp*.exe
+        path: build/Release
       
   
