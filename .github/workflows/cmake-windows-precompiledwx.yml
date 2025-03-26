@@ -37,11 +37,15 @@ jobs:
       # Choco default installs https://github.com/wxWidgets/wxWidgets/releases/download/v3.1.2/wxMSW-3.1.2-Setup.exe
       run: |
         # https://docs.wxwidgets.org/3.2.1/plat_msw_binaries.html 
-        choco install wxwidgets -y  
+        # choco install wxwidgets -y  # Does not seem to include the binaries
         # https://lebao3105.github.io/content/tutorials/wxWidgets_WindowsCmake.html
         # https://stackoverflow.com/questions/61858388/how-do-i-set-an-enviroment-variable-in-github-action-on-a-windows-server
         # https://stackoverflow.com/questions/66733076/github-actions-set-environment-variable-for-windows-build-with-powershell
         # https://stackoverflow.com/questions/45226775/cmake-how-to-specify-target-platform
+
+        https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_Dev.7z
+        https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_ReleaseDLL.7z
+        https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxMSW-3.2.6_vc14x_x64_ReleasePDB.7z
         echo "checking install dirs"
         dir C:/wxWidgets-3.1.2/lib
         dir C:/wxWidgets-3.1.2/lib/vc14x_x64_dll
