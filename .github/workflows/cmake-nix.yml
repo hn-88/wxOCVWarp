@@ -51,7 +51,7 @@ jobs:
       # trying with go-appimage
       run: |
         echo "create appimage"
-        mkdir -p appdir/usr/bin ; strip OCVWarp.bin ; cp OCVWarp.bin ./appdir/usr/bin/OCVWarp.bin
+        mkdir -p appdir/usr/bin ; strip OCVWarp ; cp OCVWarp ./appdir/usr/bin/OCVWarp
         mkdir -p appdir/usr/share/applications ; cp ../appdir/OCVWarp.desktop ./appdir/usr/share/applications/
         mkdir -p appdir/usr/share/icons/hicolor/256x256/apps ; cp ../appdir/OCVWarp.png ./appdir/usr/share/icons/hicolor/256x256/apps/       
 
