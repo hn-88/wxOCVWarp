@@ -1,3 +1,6 @@
+#ifdef _WIN64
+#include "windows.h"
+#endif
 // from https://docs.wxwidgets.org/latest/overview_helloworld.html
 // Start of wxWidgets "Hello World" Program
 #include <wx/wx.h>
@@ -75,4 +78,7 @@ void MyFrame::OnHello(wxCommandEvent& event)
     wxLogMessage("Hello world from wxWidgets!");
 }
 
+#ifdef _WIN64
 int main() { return 0;}
+#endif
+
