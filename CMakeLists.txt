@@ -16,12 +16,7 @@ set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules/")
 # https://docs.wxwidgets.org/3.2.6/overview_cmake.html#cmake_apps
 
 # from https://github.com/OpenSpace/OpenSpace/blob/feature/applesilicon/CMakeLists.txt
-# for issue #1
-if (MSVC)
-  set(wxWidgets_ROOT_DIR $ENV{WXWIN})
-  set(wxWidgets_LIBRARIES $ENV{WXWIN}/include)
-  set(wxWidgets_INCLUDE_DIR $ENV{WXWIN}/lib/vc_x64_dll)
-endif ()
+# ENV VARS for windows are being set in the github workflow.
 
 find_package(wxWidgets REQUIRED)
 if(wxWidgets_USE_FILE) # not defined in CONFIG mode
